@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PemainRouteImport } from './routes/pemain'
 import { Route as TimRouteImport } from './routes/tim'
 import { Route as TimTeamIdRouteImport } from './routes/tim.$teamId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PemainRoute = PemainRouteImport.update({
+  id: '/pemain',
+  path: '/pemain',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TimRoute = TimRouteImport.update({
@@ -31,30 +37,34 @@ const TimTeamIdRoute = TimTeamIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/pemain': typeof PemainRoute
   '/tim': typeof TimRouteWithChildren
   '/tim/$teamId': typeof TimTeamIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/pemain': typeof PemainRoute
   '/tim': typeof TimRouteWithChildren
   '/tim/$teamId': typeof TimTeamIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/pemain': typeof PemainRoute
   '/tim': typeof TimRouteWithChildren
   '/tim/$teamId': typeof TimTeamIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/tim' | '/tim/$teamId'
+  fullPaths: '/' | '/pemain' | '/tim' | '/tim/$teamId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/tim' | '/tim/$teamId'
-  id: '__root__' | '/' | '/tim' | '/tim/$teamId'
+  to: '/' | '/pemain' | '/tim' | '/tim/$teamId'
+  id: '__root__' | '/' | '/pemain' | '/tim' | '/tim/$teamId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  PemainRoute: typeof PemainRoute
   TimRoute: typeof TimRouteWithChildren
 }
 
@@ -65,6 +75,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pemain': {
+      id: '/pemain'
+      path: '/pemain'
+      fullPath: '/pemain'
+      preLoaderRoute: typeof PemainRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/tim': {
@@ -96,6 +113,7 @@ const TimRouteWithChildren = TimRoute._addFileChildren(TimRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  PemainRoute: PemainRoute,
   TimRoute: TimRouteWithChildren,
 }
 export const routeTree = rootRouteImport
