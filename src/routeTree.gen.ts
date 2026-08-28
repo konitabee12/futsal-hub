@@ -10,33 +10,255 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as HasilRouteImport } from './routes/hasil'
+import { Route as JadwalRouteImport } from './routes/jadwal'
+import { Route as KlasemenRouteImport } from './routes/klasemen'
+import { Route as PemainRouteImport } from './routes/pemain'
+import { Route as PengumumanRouteImport } from './routes/pengumuman'
+import { Route as StatistikRouteImport } from './routes/statistik'
+import { Route as TimRouteImport } from './routes/tim'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminDokumenRouteImport } from './routes/admin.dokumen'
+import { Route as AdminKontingenRouteImport } from './routes/admin.kontingen'
+import { Route as AdminOfficialRouteImport } from './routes/admin.official'
+import { Route as AdminPemainRouteImport } from './routes/admin.pemain'
+import { Route as AdminTimRouteImport } from './routes/admin.tim'
+import { Route as HasilMatchIdRouteImport } from './routes/hasil.$matchId'
+import { Route as PemainPlayerIdRouteImport } from './routes/pemain.$playerId'
+import { Route as PengumumanAnnouncementIdRouteImport } from './routes/pengumuman.$announcementId'
+import { Route as TimTeamIdRouteImport } from './routes/tim.$teamId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HasilRoute = HasilRouteImport.update({
+  id: '/hasil',
+  path: '/hasil',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JadwalRoute = JadwalRouteImport.update({
+  id: '/jadwal',
+  path: '/jadwal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KlasemenRoute = KlasemenRouteImport.update({
+  id: '/klasemen',
+  path: '/klasemen',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PemainRoute = PemainRouteImport.update({
+  id: '/pemain',
+  path: '/pemain',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PengumumanRoute = PengumumanRouteImport.update({
+  id: '/pengumuman',
+  path: '/pengumuman',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StatistikRoute = StatistikRouteImport.update({
+  id: '/statistik',
+  path: '/statistik',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TimRoute = TimRouteImport.update({
+  id: '/tim',
+  path: '/tim',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminDokumenRoute = AdminDokumenRouteImport.update({
+  id: '/admin/dokumen',
+  path: '/admin/dokumen',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminKontingenRoute = AdminKontingenRouteImport.update({
+  id: '/admin/kontingen',
+  path: '/admin/kontingen',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminOfficialRoute = AdminOfficialRouteImport.update({
+  id: '/admin/official',
+  path: '/admin/official',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminPemainRoute = AdminPemainRouteImport.update({
+  id: '/admin/pemain',
+  path: '/admin/pemain',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminTimRoute = AdminTimRouteImport.update({
+  id: '/admin/tim',
+  path: '/admin/tim',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HasilMatchIdRoute = HasilMatchIdRouteImport.update({
+  id: '/$matchId',
+  path: '/$matchId',
+  getParentRoute: () => HasilRoute,
+} as any)
+const PemainPlayerIdRoute = PemainPlayerIdRouteImport.update({
+  id: '/$playerId',
+  path: '/$playerId',
+  getParentRoute: () => PemainRoute,
+} as any)
+const PengumumanAnnouncementIdRoute =
+  PengumumanAnnouncementIdRouteImport.update({
+    id: '/$announcementId',
+    path: '/$announcementId',
+    getParentRoute: () => PengumumanRoute,
+  } as any)
+const TimTeamIdRoute = TimTeamIdRouteImport.update({
+  id: '/$teamId',
+  path: '/$teamId',
+  getParentRoute: () => TimRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/hasil': typeof HasilRouteWithChildren
+  '/jadwal': typeof JadwalRoute
+  '/klasemen': typeof KlasemenRoute
+  '/pemain': typeof PemainRouteWithChildren
+  '/pengumuman': typeof PengumumanRouteWithChildren
+  '/statistik': typeof StatistikRoute
+  '/tim': typeof TimRouteWithChildren
+  '/admin/dokumen': typeof AdminDokumenRoute
+  '/admin/kontingen': typeof AdminKontingenRoute
+  '/admin/official': typeof AdminOfficialRoute
+  '/admin/pemain': typeof AdminPemainRoute
+  '/admin/tim': typeof AdminTimRoute
+  '/hasil/$matchId': typeof HasilMatchIdRoute
+  '/pemain/$playerId': typeof PemainPlayerIdRoute
+  '/pengumuman/$announcementId': typeof PengumumanAnnouncementIdRoute
+  '/tim/$teamId': typeof TimTeamIdRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/hasil': typeof HasilRouteWithChildren
+  '/jadwal': typeof JadwalRoute
+  '/klasemen': typeof KlasemenRoute
+  '/pemain': typeof PemainRouteWithChildren
+  '/pengumuman': typeof PengumumanRouteWithChildren
+  '/statistik': typeof StatistikRoute
+  '/tim': typeof TimRouteWithChildren
+  '/admin/dokumen': typeof AdminDokumenRoute
+  '/admin/kontingen': typeof AdminKontingenRoute
+  '/admin/official': typeof AdminOfficialRoute
+  '/admin/pemain': typeof AdminPemainRoute
+  '/admin/tim': typeof AdminTimRoute
+  '/hasil/$matchId': typeof HasilMatchIdRoute
+  '/pemain/$playerId': typeof PemainPlayerIdRoute
+  '/pengumuman/$announcementId': typeof PengumumanAnnouncementIdRoute
+  '/tim/$teamId': typeof TimTeamIdRoute
+  '/admin': typeof AdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/hasil': typeof HasilRouteWithChildren
+  '/jadwal': typeof JadwalRoute
+  '/klasemen': typeof KlasemenRoute
+  '/pemain': typeof PemainRouteWithChildren
+  '/pengumuman': typeof PengumumanRouteWithChildren
+  '/statistik': typeof StatistikRoute
+  '/tim': typeof TimRouteWithChildren
+  '/admin/dokumen': typeof AdminDokumenRoute
+  '/admin/kontingen': typeof AdminKontingenRoute
+  '/admin/official': typeof AdminOfficialRoute
+  '/admin/pemain': typeof AdminPemainRoute
+  '/admin/tim': typeof AdminTimRoute
+  '/hasil/$matchId': typeof HasilMatchIdRoute
+  '/pemain/$playerId': typeof PemainPlayerIdRoute
+  '/pengumuman/$announcementId': typeof PengumumanAnnouncementIdRoute
+  '/tim/$teamId': typeof TimTeamIdRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/hasil'
+    | '/jadwal'
+    | '/klasemen'
+    | '/pemain'
+    | '/pengumuman'
+    | '/statistik'
+    | '/tim'
+    | '/admin/dokumen'
+    | '/admin/kontingen'
+    | '/admin/official'
+    | '/admin/pemain'
+    | '/admin/tim'
+    | '/hasil/$matchId'
+    | '/pemain/$playerId'
+    | '/pengumuman/$announcementId'
+    | '/tim/$teamId'
+    | '/admin/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/hasil'
+    | '/jadwal'
+    | '/klasemen'
+    | '/pemain'
+    | '/pengumuman'
+    | '/statistik'
+    | '/tim'
+    | '/admin/dokumen'
+    | '/admin/kontingen'
+    | '/admin/official'
+    | '/admin/pemain'
+    | '/admin/tim'
+    | '/hasil/$matchId'
+    | '/pemain/$playerId'
+    | '/pengumuman/$announcementId'
+    | '/tim/$teamId'
+    | '/admin'
+  id:
+    | '__root__'
+    | '/'
+    | '/hasil'
+    | '/jadwal'
+    | '/klasemen'
+    | '/pemain'
+    | '/pengumuman'
+    | '/statistik'
+    | '/tim'
+    | '/admin/dokumen'
+    | '/admin/kontingen'
+    | '/admin/official'
+    | '/admin/pemain'
+    | '/admin/tim'
+    | '/hasil/$matchId'
+    | '/pemain/$playerId'
+    | '/pengumuman/$announcementId'
+    | '/tim/$teamId'
+    | '/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  HasilRoute: typeof HasilRouteWithChildren
+  JadwalRoute: typeof JadwalRoute
+  KlasemenRoute: typeof KlasemenRoute
+  PemainRoute: typeof PemainRouteWithChildren
+  PengumumanRoute: typeof PengumumanRouteWithChildren
+  StatistikRoute: typeof StatistikRoute
+  TimRoute: typeof TimRouteWithChildren
+  AdminDokumenRoute: typeof AdminDokumenRoute
+  AdminKontingenRoute: typeof AdminKontingenRoute
+  AdminOfficialRoute: typeof AdminOfficialRoute
+  AdminPemainRoute: typeof AdminPemainRoute
+  AdminTimRoute: typeof AdminTimRoute
+  AdminIndexRoute: typeof AdminIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +270,186 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/hasil': {
+      id: '/hasil'
+      path: '/hasil'
+      fullPath: '/hasil'
+      preLoaderRoute: typeof HasilRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/jadwal': {
+      id: '/jadwal'
+      path: '/jadwal'
+      fullPath: '/jadwal'
+      preLoaderRoute: typeof JadwalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/klasemen': {
+      id: '/klasemen'
+      path: '/klasemen'
+      fullPath: '/klasemen'
+      preLoaderRoute: typeof KlasemenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pemain': {
+      id: '/pemain'
+      path: '/pemain'
+      fullPath: '/pemain'
+      preLoaderRoute: typeof PemainRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pengumuman': {
+      id: '/pengumuman'
+      path: '/pengumuman'
+      fullPath: '/pengumuman'
+      preLoaderRoute: typeof PengumumanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/statistik': {
+      id: '/statistik'
+      path: '/statistik'
+      fullPath: '/statistik'
+      preLoaderRoute: typeof StatistikRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tim': {
+      id: '/tim'
+      path: '/tim'
+      fullPath: '/tim'
+      preLoaderRoute: typeof TimRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/dokumen': {
+      id: '/admin/dokumen'
+      path: '/admin/dokumen'
+      fullPath: '/admin/dokumen'
+      preLoaderRoute: typeof AdminDokumenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/kontingen': {
+      id: '/admin/kontingen'
+      path: '/admin/kontingen'
+      fullPath: '/admin/kontingen'
+      preLoaderRoute: typeof AdminKontingenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/official': {
+      id: '/admin/official'
+      path: '/admin/official'
+      fullPath: '/admin/official'
+      preLoaderRoute: typeof AdminOfficialRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/pemain': {
+      id: '/admin/pemain'
+      path: '/admin/pemain'
+      fullPath: '/admin/pemain'
+      preLoaderRoute: typeof AdminPemainRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/tim': {
+      id: '/admin/tim'
+      path: '/admin/tim'
+      fullPath: '/admin/tim'
+      preLoaderRoute: typeof AdminTimRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hasil/$matchId': {
+      id: '/hasil/$matchId'
+      path: '/$matchId'
+      fullPath: '/hasil/$matchId'
+      preLoaderRoute: typeof HasilMatchIdRouteImport
+      parentRoute: typeof HasilRoute
+    }
+    '/pemain/$playerId': {
+      id: '/pemain/$playerId'
+      path: '/$playerId'
+      fullPath: '/pemain/$playerId'
+      preLoaderRoute: typeof PemainPlayerIdRouteImport
+      parentRoute: typeof PemainRoute
+    }
+    '/pengumuman/$announcementId': {
+      id: '/pengumuman/$announcementId'
+      path: '/$announcementId'
+      fullPath: '/pengumuman/$announcementId'
+      preLoaderRoute: typeof PengumumanAnnouncementIdRouteImport
+      parentRoute: typeof PengumumanRoute
+    }
+    '/tim/$teamId': {
+      id: '/tim/$teamId'
+      path: '/$teamId'
+      fullPath: '/tim/$teamId'
+      preLoaderRoute: typeof TimTeamIdRouteImport
+      parentRoute: typeof TimRoute
+    }
   }
 }
 
+interface HasilRouteChildren {
+  HasilMatchIdRoute: typeof HasilMatchIdRoute
+}
+
+const HasilRouteChildren: HasilRouteChildren = {
+  HasilMatchIdRoute: HasilMatchIdRoute,
+}
+
+const HasilRouteWithChildren = HasilRoute._addFileChildren(HasilRouteChildren)
+
+interface PemainRouteChildren {
+  PemainPlayerIdRoute: typeof PemainPlayerIdRoute
+}
+
+const PemainRouteChildren: PemainRouteChildren = {
+  PemainPlayerIdRoute: PemainPlayerIdRoute,
+}
+
+const PemainRouteWithChildren =
+  PemainRoute._addFileChildren(PemainRouteChildren)
+
+interface PengumumanRouteChildren {
+  PengumumanAnnouncementIdRoute: typeof PengumumanAnnouncementIdRoute
+}
+
+const PengumumanRouteChildren: PengumumanRouteChildren = {
+  PengumumanAnnouncementIdRoute: PengumumanAnnouncementIdRoute,
+}
+
+const PengumumanRouteWithChildren = PengumumanRoute._addFileChildren(
+  PengumumanRouteChildren,
+)
+
+interface TimRouteChildren {
+  TimTeamIdRoute: typeof TimTeamIdRoute
+}
+
+const TimRouteChildren: TimRouteChildren = {
+  TimTeamIdRoute: TimTeamIdRoute,
+}
+
+const TimRouteWithChildren = TimRoute._addFileChildren(TimRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  HasilRoute: HasilRouteWithChildren,
+  JadwalRoute: JadwalRoute,
+  KlasemenRoute: KlasemenRoute,
+  PemainRoute: PemainRouteWithChildren,
+  PengumumanRoute: PengumumanRouteWithChildren,
+  StatistikRoute: StatistikRoute,
+  TimRoute: TimRouteWithChildren,
+  AdminDokumenRoute: AdminDokumenRoute,
+  AdminKontingenRoute: AdminKontingenRoute,
+  AdminOfficialRoute: AdminOfficialRoute,
+  AdminPemainRoute: AdminPemainRoute,
+  AdminTimRoute: AdminTimRoute,
+  AdminIndexRoute: AdminIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
