@@ -17,6 +17,7 @@ import { Route as PemainRouteImport } from './routes/pemain'
 import { Route as PengumumanRouteImport } from './routes/pengumuman'
 import { Route as StatistikRouteImport } from './routes/statistik'
 import { Route as TimRouteImport } from './routes/tim'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as HasilMatchIdRouteImport } from './routes/hasil.$matchId'
 import { Route as PemainPlayerIdRouteImport } from './routes/pemain.$playerId'
 import { Route as PengumumanAnnouncementIdRouteImport } from './routes/pengumuman.$announcementId'
@@ -62,6 +63,11 @@ const TimRoute = TimRouteImport.update({
   path: '/tim',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const HasilMatchIdRoute = HasilMatchIdRouteImport.update({
   id: '/$matchId',
   path: '/$matchId',
@@ -97,6 +103,7 @@ export interface FileRoutesByFullPath {
   '/pemain/$playerId': typeof PemainPlayerIdRoute
   '/pengumuman/$announcementId': typeof PengumumanAnnouncementIdRoute
   '/tim/$teamId': typeof TimTeamIdRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -111,6 +118,7 @@ export interface FileRoutesByTo {
   '/pemain/$playerId': typeof PemainPlayerIdRoute
   '/pengumuman/$announcementId': typeof PengumumanAnnouncementIdRoute
   '/tim/$teamId': typeof TimTeamIdRoute
+  '/admin': typeof AdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -126,6 +134,7 @@ export interface FileRoutesById {
   '/pemain/$playerId': typeof PemainPlayerIdRoute
   '/pengumuman/$announcementId': typeof PengumumanAnnouncementIdRoute
   '/tim/$teamId': typeof TimTeamIdRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -142,6 +151,7 @@ export interface FileRouteTypes {
     | '/pemain/$playerId'
     | '/pengumuman/$announcementId'
     | '/tim/$teamId'
+    | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -156,6 +166,7 @@ export interface FileRouteTypes {
     | '/pemain/$playerId'
     | '/pengumuman/$announcementId'
     | '/tim/$teamId'
+    | '/admin'
   id:
     | '__root__'
     | '/'
@@ -170,6 +181,7 @@ export interface FileRouteTypes {
     | '/pemain/$playerId'
     | '/pengumuman/$announcementId'
     | '/tim/$teamId'
+    | '/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -181,6 +193,7 @@ export interface RootRouteChildren {
   PengumumanRoute: typeof PengumumanRouteWithChildren
   StatistikRoute: typeof StatistikRoute
   TimRoute: typeof TimRouteWithChildren
+  AdminIndexRoute: typeof AdminIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -239,6 +252,13 @@ declare module '@tanstack/react-router' {
       path: '/tim'
       fullPath: '/tim'
       preLoaderRoute: typeof TimRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/hasil/$matchId': {
@@ -324,6 +344,7 @@ const rootRouteChildren: RootRouteChildren = {
   PengumumanRoute: PengumumanRouteWithChildren,
   StatistikRoute: StatistikRoute,
   TimRoute: TimRouteWithChildren,
+  AdminIndexRoute: AdminIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
