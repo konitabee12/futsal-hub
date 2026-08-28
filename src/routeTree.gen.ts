@@ -19,6 +19,7 @@ import { Route as StatistikRouteImport } from './routes/statistik'
 import { Route as TimRouteImport } from './routes/tim'
 import { Route as HasilMatchIdRouteImport } from './routes/hasil.$matchId'
 import { Route as PemainPlayerIdRouteImport } from './routes/pemain.$playerId'
+import { Route as PengumumanAnnouncementIdRouteImport } from './routes/pengumuman.$announcementId'
 import { Route as TimTeamIdRouteImport } from './routes/tim.$teamId'
 
 const IndexRoute = IndexRouteImport.update({
@@ -71,6 +72,12 @@ const PemainPlayerIdRoute = PemainPlayerIdRouteImport.update({
   path: '/$playerId',
   getParentRoute: () => PemainRoute,
 } as any)
+const PengumumanAnnouncementIdRoute =
+  PengumumanAnnouncementIdRouteImport.update({
+    id: '/$announcementId',
+    path: '/$announcementId',
+    getParentRoute: () => PengumumanRoute,
+  } as any)
 const TimTeamIdRoute = TimTeamIdRouteImport.update({
   id: '/$teamId',
   path: '/$teamId',
@@ -83,11 +90,12 @@ export interface FileRoutesByFullPath {
   '/jadwal': typeof JadwalRoute
   '/klasemen': typeof KlasemenRoute
   '/pemain': typeof PemainRouteWithChildren
-  '/pengumuman': typeof PengumumanRoute
+  '/pengumuman': typeof PengumumanRouteWithChildren
   '/statistik': typeof StatistikRoute
   '/tim': typeof TimRouteWithChildren
   '/hasil/$matchId': typeof HasilMatchIdRoute
   '/pemain/$playerId': typeof PemainPlayerIdRoute
+  '/pengumuman/$announcementId': typeof PengumumanAnnouncementIdRoute
   '/tim/$teamId': typeof TimTeamIdRoute
 }
 export interface FileRoutesByTo {
@@ -96,11 +104,12 @@ export interface FileRoutesByTo {
   '/jadwal': typeof JadwalRoute
   '/klasemen': typeof KlasemenRoute
   '/pemain': typeof PemainRouteWithChildren
-  '/pengumuman': typeof PengumumanRoute
+  '/pengumuman': typeof PengumumanRouteWithChildren
   '/statistik': typeof StatistikRoute
   '/tim': typeof TimRouteWithChildren
   '/hasil/$matchId': typeof HasilMatchIdRoute
   '/pemain/$playerId': typeof PemainPlayerIdRoute
+  '/pengumuman/$announcementId': typeof PengumumanAnnouncementIdRoute
   '/tim/$teamId': typeof TimTeamIdRoute
 }
 export interface FileRoutesById {
@@ -110,11 +119,12 @@ export interface FileRoutesById {
   '/jadwal': typeof JadwalRoute
   '/klasemen': typeof KlasemenRoute
   '/pemain': typeof PemainRouteWithChildren
-  '/pengumuman': typeof PengumumanRoute
+  '/pengumuman': typeof PengumumanRouteWithChildren
   '/statistik': typeof StatistikRoute
   '/tim': typeof TimRouteWithChildren
   '/hasil/$matchId': typeof HasilMatchIdRoute
   '/pemain/$playerId': typeof PemainPlayerIdRoute
+  '/pengumuman/$announcementId': typeof PengumumanAnnouncementIdRoute
   '/tim/$teamId': typeof TimTeamIdRoute
 }
 export interface FileRouteTypes {
@@ -130,6 +140,7 @@ export interface FileRouteTypes {
     | '/tim'
     | '/hasil/$matchId'
     | '/pemain/$playerId'
+    | '/pengumuman/$announcementId'
     | '/tim/$teamId'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -143,6 +154,7 @@ export interface FileRouteTypes {
     | '/tim'
     | '/hasil/$matchId'
     | '/pemain/$playerId'
+    | '/pengumuman/$announcementId'
     | '/tim/$teamId'
   id:
     | '__root__'
@@ -156,6 +168,7 @@ export interface FileRouteTypes {
     | '/tim'
     | '/hasil/$matchId'
     | '/pemain/$playerId'
+    | '/pengumuman/$announcementId'
     | '/tim/$teamId'
   fileRoutesById: FileRoutesById
 }
@@ -165,7 +178,7 @@ export interface RootRouteChildren {
   JadwalRoute: typeof JadwalRoute
   KlasemenRoute: typeof KlasemenRoute
   PemainRoute: typeof PemainRouteWithChildren
-  PengumumanRoute: typeof PengumumanRoute
+  PengumumanRoute: typeof PengumumanRouteWithChildren
   StatistikRoute: typeof StatistikRoute
   TimRoute: typeof TimRouteWithChildren
 }
@@ -242,6 +255,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PemainPlayerIdRouteImport
       parentRoute: typeof PemainRoute
     }
+    '/pengumuman/$announcementId': {
+      id: '/pengumuman/$announcementId'
+      path: '/$announcementId'
+      fullPath: '/pengumuman/$announcementId'
+      preLoaderRoute: typeof PengumumanAnnouncementIdRouteImport
+      parentRoute: typeof PengumumanRoute
+    }
     '/tim/$teamId': {
       id: '/tim/$teamId'
       path: '/$teamId'
@@ -273,6 +293,18 @@ const PemainRouteChildren: PemainRouteChildren = {
 const PemainRouteWithChildren =
   PemainRoute._addFileChildren(PemainRouteChildren)
 
+interface PengumumanRouteChildren {
+  PengumumanAnnouncementIdRoute: typeof PengumumanAnnouncementIdRoute
+}
+
+const PengumumanRouteChildren: PengumumanRouteChildren = {
+  PengumumanAnnouncementIdRoute: PengumumanAnnouncementIdRoute,
+}
+
+const PengumumanRouteWithChildren = PengumumanRoute._addFileChildren(
+  PengumumanRouteChildren,
+)
+
 interface TimRouteChildren {
   TimTeamIdRoute: typeof TimTeamIdRoute
 }
@@ -289,7 +321,7 @@ const rootRouteChildren: RootRouteChildren = {
   JadwalRoute: JadwalRoute,
   KlasemenRoute: KlasemenRoute,
   PemainRoute: PemainRouteWithChildren,
-  PengumumanRoute: PengumumanRoute,
+  PengumumanRoute: PengumumanRouteWithChildren,
   StatistikRoute: StatistikRoute,
   TimRoute: TimRouteWithChildren,
 }
