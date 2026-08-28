@@ -1,5 +1,6 @@
 import { createContext, useContext, useMemo, useState, type ReactNode } from "react";
 import type { Role } from "@/types/domain";
+import { useAuth } from "@/lib/auth-context";
 
 export const ROLE_LABEL: Record<Role, string> = {
   SUPER_ADMIN: "Super Admin",
@@ -28,6 +29,7 @@ export const ROLE_SCOPE: Record<Role, string> = {
 export type Permission =
   | "dashboard.view"
   | "contingent.view"
+  | "contingent.create"
   | "contingent.update"
   | "team.view"
   | "team.update"
@@ -52,8 +54,8 @@ export type Permission =
   | "audit.view"
   | "notification.view";
 
-const ALL: Permission[] = [
-  "dashboard.view", "contingent.view", "contingent.update", "team.view", "team.update",
+export const PERMISSIONS: Permission[] = [
+  "dashboard.view", "contingent.view", "contingent.create", "contingent.update", "team.view", "team.update",
   "player.view", "player.update", "official.view", "document.view", "verification.view",
   "verification.decide", "eligibility.view", "competition.view", "competition.update",
   "venue.view", "schedule.view", "schedule.update", "match.view", "match.operate",
@@ -64,9 +66,9 @@ const ALL: Permission[] = [
 const BASE: Permission[] = ["dashboard.view", "notification.view"];
 
 export const ROLE_PERMISSIONS: Record<Role, Permission[]> = {
-  SUPER_ADMIN: ALL,
-  EVENT_ADMIN: ALL.filter((p) => p !== "match.operate"),
-  FUTSAL_ADMIN: ALL.filter((p) => p !== "audit.view" || true),
+  SUPER_ADMIN: PERMISSIONS,
+  EVENT_ADMIN: PERMISSIONS.filter((p) => p !== "match.operate"),
+  FUTSAL_ADMIN: PERMISSIONS.filter((p) => p !== "audit.view"),
   VERIFIER: [
     ...BASE, "contingent.view", "team.view", "player.view", "official.view",
     "document.view", "verification.view", "verification.decide", "eligibility.view",
@@ -105,13 +107,18 @@ const RbacContext = createContext<RbacValue>({
 
 export function RbacProvider({ children }: { children: ReactNode }) {
   const [role, setRole] = useState<Role>("SUPER_ADMIN");
+  const { state: authState } = useAuth();
+  const resolvedRoles = authState.status === "authenticated" ? authState.identity.roles : [];
+  const resolvedPermissions = authState.status === "authenticated" ? authState.identity.permissions : [];
+  const activeRole = resolvedRoles[0] ?? role;
   const value = useMemo<RbacValue>(
     () => ({
-      role,
+      role: activeRole,
       setRole,
-      can: (p: Permission) => ROLE_PERMISSIONS[role].includes(p),
+      can: (p: Permission) => authState.status === "authenticated"
+        && resolvedPermissions.includes(p),
     }),
-    [role],
+    [activeRole, authState.status, resolvedPermissions],
   );
   return <RbacContext.Provider value={value}>{children}</RbacContext.Provider>;
 }

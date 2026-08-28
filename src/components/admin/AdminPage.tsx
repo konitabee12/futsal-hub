@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { AdminLayout, NoAccess } from "@/components/AdminLayout";
 import { PageHeader } from "@/components/PageHeader";
 import { useRbac, type Permission } from "@/lib/rbac";
+import { useAuth } from "@/lib/auth-context";
 
 export function AdminPage({
   title,
@@ -17,10 +18,11 @@ export function AdminPage({
   children: ReactNode;
 }) {
   const { can } = useRbac();
+  const { state: authState } = useAuth();
   return (
     <AdminLayout>
       <PageHeader title={title} description={description} actions={can(permission) ? actions : undefined} />
-      {can(permission) ? children : <NoAccess />}
+      {authState.status === "authenticated" && can(permission) ? children : <NoAccess />}
     </AdminLayout>
   );
 }

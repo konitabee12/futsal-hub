@@ -58,6 +58,8 @@ export type Role =
 
 export interface Contingent {
   id: string;
+  eventId?: string;
+  sportId?: string;
   code: string;
   name: string;
   region: string;
@@ -67,6 +69,7 @@ export interface Contingent {
   status: RegistrationStatus;
   documents: number;
   verifiedDocuments: number;
+  teamCount?: number;
 }
 
 export interface Team {
@@ -80,6 +83,9 @@ export interface Team {
   groupId: string;
   status: RegistrationStatus;
   eligibility: EligibilityStatus;
+  contingentName?: string;
+  groupName?: string;
+  playerCount?: number;
 }
 
 export interface Player {
