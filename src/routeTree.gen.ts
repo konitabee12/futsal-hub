@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TimRouteImport } from './routes/tim'
+import { Route as TimTeamIdRouteImport } from './routes/tim.$teamId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +23,39 @@ const TimRoute = TimRouteImport.update({
   path: '/tim',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TimTeamIdRoute = TimTeamIdRouteImport.update({
+  id: '/$teamId',
+  path: '/$teamId',
+  getParentRoute: () => TimRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/tim': typeof TimRoute
+  '/tim': typeof TimRouteWithChildren
+  '/tim/$teamId': typeof TimTeamIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/tim': typeof TimRoute
+  '/tim': typeof TimRouteWithChildren
+  '/tim/$teamId': typeof TimTeamIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/tim': typeof TimRoute
+  '/tim': typeof TimRouteWithChildren
+  '/tim/$teamId': typeof TimTeamIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/tim'
+  fullPaths: '/' | '/tim' | '/tim/$teamId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/tim'
-  id: '__root__' | '/' | '/tim'
+  to: '/' | '/tim' | '/tim/$teamId'
+  id: '__root__' | '/' | '/tim' | '/tim/$teamId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  TimRoute: typeof TimRoute
+  TimRoute: typeof TimRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +74,29 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TimRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tim/$teamId': {
+      id: '/tim/$teamId'
+      path: '/$teamId'
+      fullPath: '/tim/$teamId'
+      preLoaderRoute: typeof TimTeamIdRouteImport
+      parentRoute: typeof TimRoute
+    }
   }
 }
 
+interface TimRouteChildren {
+  TimTeamIdRoute: typeof TimTeamIdRoute
+}
+
+const TimRouteChildren: TimRouteChildren = {
+  TimTeamIdRoute: TimTeamIdRoute,
+}
+
+const TimRouteWithChildren = TimRoute._addFileChildren(TimRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  TimRoute: TimRoute,
+  TimRoute: TimRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
