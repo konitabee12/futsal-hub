@@ -14,6 +14,7 @@ import { Route as HasilRouteImport } from './routes/hasil'
 import { Route as JadwalRouteImport } from './routes/jadwal'
 import { Route as PemainRouteImport } from './routes/pemain'
 import { Route as TimRouteImport } from './routes/tim'
+import { Route as HasilMatchIdRouteImport } from './routes/hasil.$matchId'
 import { Route as PemainPlayerIdRouteImport } from './routes/pemain.$playerId'
 import { Route as TimTeamIdRouteImport } from './routes/tim.$teamId'
 
@@ -42,6 +43,11 @@ const TimRoute = TimRouteImport.update({
   path: '/tim',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HasilMatchIdRoute = HasilMatchIdRouteImport.update({
+  id: '/$matchId',
+  path: '/$matchId',
+  getParentRoute: () => HasilRoute,
+} as any)
 const PemainPlayerIdRoute = PemainPlayerIdRouteImport.update({
   id: '/$playerId',
   path: '/$playerId',
@@ -55,29 +61,32 @@ const TimTeamIdRoute = TimTeamIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/hasil': typeof HasilRoute
+  '/hasil': typeof HasilRouteWithChildren
   '/jadwal': typeof JadwalRoute
   '/pemain': typeof PemainRouteWithChildren
   '/tim': typeof TimRouteWithChildren
+  '/hasil/$matchId': typeof HasilMatchIdRoute
   '/pemain/$playerId': typeof PemainPlayerIdRoute
   '/tim/$teamId': typeof TimTeamIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/hasil': typeof HasilRoute
+  '/hasil': typeof HasilRouteWithChildren
   '/jadwal': typeof JadwalRoute
   '/pemain': typeof PemainRouteWithChildren
   '/tim': typeof TimRouteWithChildren
+  '/hasil/$matchId': typeof HasilMatchIdRoute
   '/pemain/$playerId': typeof PemainPlayerIdRoute
   '/tim/$teamId': typeof TimTeamIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/hasil': typeof HasilRoute
+  '/hasil': typeof HasilRouteWithChildren
   '/jadwal': typeof JadwalRoute
   '/pemain': typeof PemainRouteWithChildren
   '/tim': typeof TimRouteWithChildren
+  '/hasil/$matchId': typeof HasilMatchIdRoute
   '/pemain/$playerId': typeof PemainPlayerIdRoute
   '/tim/$teamId': typeof TimTeamIdRoute
 }
@@ -89,6 +98,7 @@ export interface FileRouteTypes {
     | '/jadwal'
     | '/pemain'
     | '/tim'
+    | '/hasil/$matchId'
     | '/pemain/$playerId'
     | '/tim/$teamId'
   fileRoutesByTo: FileRoutesByTo
@@ -98,6 +108,7 @@ export interface FileRouteTypes {
     | '/jadwal'
     | '/pemain'
     | '/tim'
+    | '/hasil/$matchId'
     | '/pemain/$playerId'
     | '/tim/$teamId'
   id:
@@ -107,13 +118,14 @@ export interface FileRouteTypes {
     | '/jadwal'
     | '/pemain'
     | '/tim'
+    | '/hasil/$matchId'
     | '/pemain/$playerId'
     | '/tim/$teamId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  HasilRoute: typeof HasilRoute
+  HasilRoute: typeof HasilRouteWithChildren
   JadwalRoute: typeof JadwalRoute
   PemainRoute: typeof PemainRouteWithChildren
   TimRoute: typeof TimRouteWithChildren
@@ -156,6 +168,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TimRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/hasil/$matchId': {
+      id: '/hasil/$matchId'
+      path: '/$matchId'
+      fullPath: '/hasil/$matchId'
+      preLoaderRoute: typeof HasilMatchIdRouteImport
+      parentRoute: typeof HasilRoute
+    }
     '/pemain/$playerId': {
       id: '/pemain/$playerId'
       path: '/$playerId'
@@ -172,6 +191,16 @@ declare module '@tanstack/react-router' {
     }
   }
 }
+
+interface HasilRouteChildren {
+  HasilMatchIdRoute: typeof HasilMatchIdRoute
+}
+
+const HasilRouteChildren: HasilRouteChildren = {
+  HasilMatchIdRoute: HasilMatchIdRoute,
+}
+
+const HasilRouteWithChildren = HasilRoute._addFileChildren(HasilRouteChildren)
 
 interface PemainRouteChildren {
   PemainPlayerIdRoute: typeof PemainPlayerIdRoute
@@ -196,7 +225,7 @@ const TimRouteWithChildren = TimRoute._addFileChildren(TimRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  HasilRoute: HasilRoute,
+  HasilRoute: HasilRouteWithChildren,
   JadwalRoute: JadwalRoute,
   PemainRoute: PemainRouteWithChildren,
   TimRoute: TimRouteWithChildren,
