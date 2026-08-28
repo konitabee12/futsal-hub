@@ -18,6 +18,7 @@ import { Route as PengumumanRouteImport } from './routes/pengumuman'
 import { Route as StatistikRouteImport } from './routes/statistik'
 import { Route as TimRouteImport } from './routes/tim'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminDokumenRouteImport } from './routes/admin.dokumen'
 import { Route as AdminKontingenRouteImport } from './routes/admin.kontingen'
 import { Route as AdminOfficialRouteImport } from './routes/admin.official'
 import { Route as AdminPemainRouteImport } from './routes/admin.pemain'
@@ -72,6 +73,11 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/admin/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminDokumenRoute = AdminDokumenRouteImport.update({
+  id: '/admin/dokumen',
+  path: '/admin/dokumen',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminKontingenRoute = AdminKontingenRouteImport.update({
   id: '/admin/kontingen',
   path: '/admin/kontingen',
@@ -123,6 +129,7 @@ export interface FileRoutesByFullPath {
   '/pengumuman': typeof PengumumanRouteWithChildren
   '/statistik': typeof StatistikRoute
   '/tim': typeof TimRouteWithChildren
+  '/admin/dokumen': typeof AdminDokumenRoute
   '/admin/kontingen': typeof AdminKontingenRoute
   '/admin/official': typeof AdminOfficialRoute
   '/admin/pemain': typeof AdminPemainRoute
@@ -142,6 +149,7 @@ export interface FileRoutesByTo {
   '/pengumuman': typeof PengumumanRouteWithChildren
   '/statistik': typeof StatistikRoute
   '/tim': typeof TimRouteWithChildren
+  '/admin/dokumen': typeof AdminDokumenRoute
   '/admin/kontingen': typeof AdminKontingenRoute
   '/admin/official': typeof AdminOfficialRoute
   '/admin/pemain': typeof AdminPemainRoute
@@ -162,6 +170,7 @@ export interface FileRoutesById {
   '/pengumuman': typeof PengumumanRouteWithChildren
   '/statistik': typeof StatistikRoute
   '/tim': typeof TimRouteWithChildren
+  '/admin/dokumen': typeof AdminDokumenRoute
   '/admin/kontingen': typeof AdminKontingenRoute
   '/admin/official': typeof AdminOfficialRoute
   '/admin/pemain': typeof AdminPemainRoute
@@ -183,6 +192,7 @@ export interface FileRouteTypes {
     | '/pengumuman'
     | '/statistik'
     | '/tim'
+    | '/admin/dokumen'
     | '/admin/kontingen'
     | '/admin/official'
     | '/admin/pemain'
@@ -202,6 +212,7 @@ export interface FileRouteTypes {
     | '/pengumuman'
     | '/statistik'
     | '/tim'
+    | '/admin/dokumen'
     | '/admin/kontingen'
     | '/admin/official'
     | '/admin/pemain'
@@ -221,6 +232,7 @@ export interface FileRouteTypes {
     | '/pengumuman'
     | '/statistik'
     | '/tim'
+    | '/admin/dokumen'
     | '/admin/kontingen'
     | '/admin/official'
     | '/admin/pemain'
@@ -241,6 +253,7 @@ export interface RootRouteChildren {
   PengumumanRoute: typeof PengumumanRouteWithChildren
   StatistikRoute: typeof StatistikRoute
   TimRoute: typeof TimRouteWithChildren
+  AdminDokumenRoute: typeof AdminDokumenRoute
   AdminKontingenRoute: typeof AdminKontingenRoute
   AdminOfficialRoute: typeof AdminOfficialRoute
   AdminPemainRoute: typeof AdminPemainRoute
@@ -311,6 +324,13 @@ declare module '@tanstack/react-router' {
       path: '/admin'
       fullPath: '/admin/'
       preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/dokumen': {
+      id: '/admin/dokumen'
+      path: '/admin/dokumen'
+      fullPath: '/admin/dokumen'
+      preLoaderRoute: typeof AdminDokumenRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/kontingen': {
@@ -424,6 +444,7 @@ const rootRouteChildren: RootRouteChildren = {
   PengumumanRoute: PengumumanRouteWithChildren,
   StatistikRoute: StatistikRoute,
   TimRoute: TimRouteWithChildren,
+  AdminDokumenRoute: AdminDokumenRoute,
   AdminKontingenRoute: AdminKontingenRoute,
   AdminOfficialRoute: AdminOfficialRoute,
   AdminPemainRoute: AdminPemainRoute,
