@@ -14,6 +14,7 @@ import { Route as HasilRouteImport } from './routes/hasil'
 import { Route as JadwalRouteImport } from './routes/jadwal'
 import { Route as KlasemenRouteImport } from './routes/klasemen'
 import { Route as PemainRouteImport } from './routes/pemain'
+import { Route as PengumumanRouteImport } from './routes/pengumuman'
 import { Route as StatistikRouteImport } from './routes/statistik'
 import { Route as TimRouteImport } from './routes/tim'
 import { Route as HasilMatchIdRouteImport } from './routes/hasil.$matchId'
@@ -43,6 +44,11 @@ const KlasemenRoute = KlasemenRouteImport.update({
 const PemainRoute = PemainRouteImport.update({
   id: '/pemain',
   path: '/pemain',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PengumumanRoute = PengumumanRouteImport.update({
+  id: '/pengumuman',
+  path: '/pengumuman',
   getParentRoute: () => rootRouteImport,
 } as any)
 const StatistikRoute = StatistikRouteImport.update({
@@ -77,6 +83,7 @@ export interface FileRoutesByFullPath {
   '/jadwal': typeof JadwalRoute
   '/klasemen': typeof KlasemenRoute
   '/pemain': typeof PemainRouteWithChildren
+  '/pengumuman': typeof PengumumanRoute
   '/statistik': typeof StatistikRoute
   '/tim': typeof TimRouteWithChildren
   '/hasil/$matchId': typeof HasilMatchIdRoute
@@ -89,6 +96,7 @@ export interface FileRoutesByTo {
   '/jadwal': typeof JadwalRoute
   '/klasemen': typeof KlasemenRoute
   '/pemain': typeof PemainRouteWithChildren
+  '/pengumuman': typeof PengumumanRoute
   '/statistik': typeof StatistikRoute
   '/tim': typeof TimRouteWithChildren
   '/hasil/$matchId': typeof HasilMatchIdRoute
@@ -102,6 +110,7 @@ export interface FileRoutesById {
   '/jadwal': typeof JadwalRoute
   '/klasemen': typeof KlasemenRoute
   '/pemain': typeof PemainRouteWithChildren
+  '/pengumuman': typeof PengumumanRoute
   '/statistik': typeof StatistikRoute
   '/tim': typeof TimRouteWithChildren
   '/hasil/$matchId': typeof HasilMatchIdRoute
@@ -116,6 +125,7 @@ export interface FileRouteTypes {
     | '/jadwal'
     | '/klasemen'
     | '/pemain'
+    | '/pengumuman'
     | '/statistik'
     | '/tim'
     | '/hasil/$matchId'
@@ -128,6 +138,7 @@ export interface FileRouteTypes {
     | '/jadwal'
     | '/klasemen'
     | '/pemain'
+    | '/pengumuman'
     | '/statistik'
     | '/tim'
     | '/hasil/$matchId'
@@ -140,6 +151,7 @@ export interface FileRouteTypes {
     | '/jadwal'
     | '/klasemen'
     | '/pemain'
+    | '/pengumuman'
     | '/statistik'
     | '/tim'
     | '/hasil/$matchId'
@@ -153,6 +165,7 @@ export interface RootRouteChildren {
   JadwalRoute: typeof JadwalRoute
   KlasemenRoute: typeof KlasemenRoute
   PemainRoute: typeof PemainRouteWithChildren
+  PengumumanRoute: typeof PengumumanRoute
   StatistikRoute: typeof StatistikRoute
   TimRoute: typeof TimRouteWithChildren
 }
@@ -192,6 +205,13 @@ declare module '@tanstack/react-router' {
       path: '/pemain'
       fullPath: '/pemain'
       preLoaderRoute: typeof PemainRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pengumuman': {
+      id: '/pengumuman'
+      path: '/pengumuman'
+      fullPath: '/pengumuman'
+      preLoaderRoute: typeof PengumumanRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/statistik': {
@@ -269,6 +289,7 @@ const rootRouteChildren: RootRouteChildren = {
   JadwalRoute: JadwalRoute,
   KlasemenRoute: KlasemenRoute,
   PemainRoute: PemainRouteWithChildren,
+  PengumumanRoute: PengumumanRoute,
   StatistikRoute: StatistikRoute,
   TimRoute: TimRouteWithChildren,
 }
