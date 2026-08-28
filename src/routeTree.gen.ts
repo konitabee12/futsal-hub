@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as JadwalRouteImport } from './routes/jadwal'
 import { Route as PemainRouteImport } from './routes/pemain'
 import { Route as TimRouteImport } from './routes/tim'
 import { Route as PemainPlayerIdRouteImport } from './routes/pemain.$playerId'
@@ -18,6 +19,11 @@ import { Route as TimTeamIdRouteImport } from './routes/tim.$teamId'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JadwalRoute = JadwalRouteImport.update({
+  id: '/jadwal',
+  path: '/jadwal',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PemainRoute = PemainRouteImport.update({
@@ -43,6 +49,7 @@ const TimTeamIdRoute = TimTeamIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/jadwal': typeof JadwalRoute
   '/pemain': typeof PemainRouteWithChildren
   '/tim': typeof TimRouteWithChildren
   '/pemain/$playerId': typeof PemainPlayerIdRoute
@@ -50,6 +57,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/jadwal': typeof JadwalRoute
   '/pemain': typeof PemainRouteWithChildren
   '/tim': typeof TimRouteWithChildren
   '/pemain/$playerId': typeof PemainPlayerIdRoute
@@ -58,6 +66,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/jadwal': typeof JadwalRoute
   '/pemain': typeof PemainRouteWithChildren
   '/tim': typeof TimRouteWithChildren
   '/pemain/$playerId': typeof PemainPlayerIdRoute
@@ -65,15 +74,24 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/pemain' | '/tim' | '/pemain/$playerId' | '/tim/$teamId'
+  fullPaths:
+    '/' | '/jadwal' | '/pemain' | '/tim' | '/pemain/$playerId' | '/tim/$teamId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/pemain' | '/tim' | '/pemain/$playerId' | '/tim/$teamId'
+  to:
+    '/' | '/jadwal' | '/pemain' | '/tim' | '/pemain/$playerId' | '/tim/$teamId'
   id:
-    '__root__' | '/' | '/pemain' | '/tim' | '/pemain/$playerId' | '/tim/$teamId'
+    | '__root__'
+    | '/'
+    | '/jadwal'
+    | '/pemain'
+    | '/tim'
+    | '/pemain/$playerId'
+    | '/tim/$teamId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  JadwalRoute: typeof JadwalRoute
   PemainRoute: typeof PemainRouteWithChildren
   TimRoute: typeof TimRouteWithChildren
 }
@@ -85,6 +103,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/jadwal': {
+      id: '/jadwal'
+      path: '/jadwal'
+      fullPath: '/jadwal'
+      preLoaderRoute: typeof JadwalRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/pemain': {
@@ -141,6 +166,7 @@ const TimRouteWithChildren = TimRoute._addFileChildren(TimRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  JadwalRoute: JadwalRoute,
   PemainRoute: PemainRouteWithChildren,
   TimRoute: TimRouteWithChildren,
 }
