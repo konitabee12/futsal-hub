@@ -19,6 +19,7 @@ import { Route as StatistikRouteImport } from './routes/statistik'
 import { Route as TimRouteImport } from './routes/tim'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminKontingenRouteImport } from './routes/admin.kontingen'
+import { Route as AdminOfficialRouteImport } from './routes/admin.official'
 import { Route as AdminPemainRouteImport } from './routes/admin.pemain'
 import { Route as AdminTimRouteImport } from './routes/admin.tim'
 import { Route as HasilMatchIdRouteImport } from './routes/hasil.$matchId'
@@ -76,6 +77,11 @@ const AdminKontingenRoute = AdminKontingenRouteImport.update({
   path: '/admin/kontingen',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminOfficialRoute = AdminOfficialRouteImport.update({
+  id: '/admin/official',
+  path: '/admin/official',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminPemainRoute = AdminPemainRouteImport.update({
   id: '/admin/pemain',
   path: '/admin/pemain',
@@ -118,6 +124,7 @@ export interface FileRoutesByFullPath {
   '/statistik': typeof StatistikRoute
   '/tim': typeof TimRouteWithChildren
   '/admin/kontingen': typeof AdminKontingenRoute
+  '/admin/official': typeof AdminOfficialRoute
   '/admin/pemain': typeof AdminPemainRoute
   '/admin/tim': typeof AdminTimRoute
   '/hasil/$matchId': typeof HasilMatchIdRoute
@@ -136,6 +143,7 @@ export interface FileRoutesByTo {
   '/statistik': typeof StatistikRoute
   '/tim': typeof TimRouteWithChildren
   '/admin/kontingen': typeof AdminKontingenRoute
+  '/admin/official': typeof AdminOfficialRoute
   '/admin/pemain': typeof AdminPemainRoute
   '/admin/tim': typeof AdminTimRoute
   '/hasil/$matchId': typeof HasilMatchIdRoute
@@ -155,6 +163,7 @@ export interface FileRoutesById {
   '/statistik': typeof StatistikRoute
   '/tim': typeof TimRouteWithChildren
   '/admin/kontingen': typeof AdminKontingenRoute
+  '/admin/official': typeof AdminOfficialRoute
   '/admin/pemain': typeof AdminPemainRoute
   '/admin/tim': typeof AdminTimRoute
   '/hasil/$matchId': typeof HasilMatchIdRoute
@@ -175,6 +184,7 @@ export interface FileRouteTypes {
     | '/statistik'
     | '/tim'
     | '/admin/kontingen'
+    | '/admin/official'
     | '/admin/pemain'
     | '/admin/tim'
     | '/hasil/$matchId'
@@ -193,6 +203,7 @@ export interface FileRouteTypes {
     | '/statistik'
     | '/tim'
     | '/admin/kontingen'
+    | '/admin/official'
     | '/admin/pemain'
     | '/admin/tim'
     | '/hasil/$matchId'
@@ -211,6 +222,7 @@ export interface FileRouteTypes {
     | '/statistik'
     | '/tim'
     | '/admin/kontingen'
+    | '/admin/official'
     | '/admin/pemain'
     | '/admin/tim'
     | '/hasil/$matchId'
@@ -230,6 +242,7 @@ export interface RootRouteChildren {
   StatistikRoute: typeof StatistikRoute
   TimRoute: typeof TimRouteWithChildren
   AdminKontingenRoute: typeof AdminKontingenRoute
+  AdminOfficialRoute: typeof AdminOfficialRoute
   AdminPemainRoute: typeof AdminPemainRoute
   AdminTimRoute: typeof AdminTimRoute
   AdminIndexRoute: typeof AdminIndexRoute
@@ -305,6 +318,13 @@ declare module '@tanstack/react-router' {
       path: '/admin/kontingen'
       fullPath: '/admin/kontingen'
       preLoaderRoute: typeof AdminKontingenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/official': {
+      id: '/admin/official'
+      path: '/admin/official'
+      fullPath: '/admin/official'
+      preLoaderRoute: typeof AdminOfficialRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/pemain': {
@@ -405,6 +425,7 @@ const rootRouteChildren: RootRouteChildren = {
   StatistikRoute: StatistikRoute,
   TimRoute: TimRouteWithChildren,
   AdminKontingenRoute: AdminKontingenRoute,
+  AdminOfficialRoute: AdminOfficialRoute,
   AdminPemainRoute: AdminPemainRoute,
   AdminTimRoute: AdminTimRoute,
   AdminIndexRoute: AdminIndexRoute,
