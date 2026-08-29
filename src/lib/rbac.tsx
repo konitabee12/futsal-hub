@@ -32,14 +32,17 @@ export type Permission =
   | "contingent.create"
   | "contingent.update"
   | "team.view"
+  | "team.create"
   | "team.update"
   | "player.view"
+  | "player.create"
   | "player.update"
   | "official.view"
   | "document.view"
   | "verification.view"
   | "verification.decide"
   | "eligibility.view"
+  | "eligibility.decide"
   | "competition.view"
   | "competition.update"
   | "venue.view"
@@ -55,9 +58,9 @@ export type Permission =
   | "notification.view";
 
 export const PERMISSIONS: Permission[] = [
-  "dashboard.view", "contingent.view", "contingent.create", "contingent.update", "team.view", "team.update",
-  "player.view", "player.update", "official.view", "document.view", "verification.view",
-  "verification.decide", "eligibility.view", "competition.view", "competition.update",
+  "dashboard.view", "contingent.view", "contingent.create", "contingent.update", "team.view", "team.create", "team.update",
+  "player.view", "player.create", "player.update", "official.view", "document.view", "verification.view",
+  "verification.decide", "eligibility.view", "eligibility.decide", "competition.view", "competition.update",
   "venue.view", "schedule.view", "schedule.update", "match.view", "match.operate",
   "result.view", "result.verify", "standings.view", "standings.recalculate",
   "audit.view", "notification.view",
@@ -71,7 +74,7 @@ export const ROLE_PERMISSIONS: Record<Role, Permission[]> = {
   FUTSAL_ADMIN: PERMISSIONS.filter((p) => p !== "audit.view"),
   VERIFIER: [
     ...BASE, "contingent.view", "team.view", "player.view", "official.view",
-    "document.view", "verification.view", "verification.decide", "eligibility.view",
+    "document.view", "verification.view", "verification.decide", "eligibility.view", "eligibility.decide",
   ],
   COMPETITION_OPERATOR: [
     ...BASE, "team.view", "competition.view", "competition.update", "venue.view",
@@ -83,12 +86,12 @@ export const ROLE_PERMISSIONS: Record<Role, Permission[]> = {
   ],
   MATCH_OFFICIAL: [...BASE, "match.view", "schedule.view", "result.view"],
   CONTINGENT_ADMIN: [
-    ...BASE, "contingent.view", "contingent.update", "team.view", "team.update",
-    "player.view", "player.update", "official.view", "document.view", "eligibility.view",
+    ...BASE, "contingent.view", "contingent.update", "team.view", "team.create", "team.update",
+    "player.view", "player.create", "player.update", "official.view", "document.view", "eligibility.view",
     "schedule.view", "match.view", "standings.view",
   ],
   TEAM_MANAGER: [
-    ...BASE, "team.view", "player.view", "player.update", "official.view",
+    ...BASE, "team.view", "team.update", "player.view", "player.create", "player.update", "official.view",
     "document.view", "eligibility.view", "schedule.view", "match.view", "standings.view",
   ],
 };

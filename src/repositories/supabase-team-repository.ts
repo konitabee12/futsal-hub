@@ -1,7 +1,7 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { Database } from "@/types/database";
 import type { Team } from "@/types/domain";
-import type { TeamReadRepository } from "@/repositories/contracts";
+import type { TeamCreateInput, TeamRepository, TeamUpdateInput } from "@/repositories/contracts";
 
 type TeamRow = Database["public"]["Tables"]["teams"]["Row"];
 
@@ -31,7 +31,7 @@ function mapTeam(
   return team;
 }
 
-export class SupabaseTeamRepository implements TeamReadRepository {
+export class SupabaseTeamRepository implements TeamRepository {
   constructor(private readonly supabase: SupabaseClient<Database>) {}
 
   async list(): Promise<Team[]> {
@@ -53,6 +53,52 @@ export class SupabaseTeamRepository implements TeamReadRepository {
     if (!data) return null;
     const teams = await this.mapRows([data]);
     return teams[0] ?? null;
+  }
+
+  async create(input: TeamCreateInput): Promise<Team> {
+    const { data, error } = await this.supabase
+      .from("teams")
+      .insert({
+        contingent_id: input.contingentId,
+        category: input.category,
+        name: input.name,
+        short_name: input.shortName,
+        manager: input.manager,
+        head_coach: input.headCoach,
+        status: "DRAFT",
+        eligibility: "PENDING",
+      })
+      .select("id")
+      .single();
+    if (error) throw new Error("Unable to create team");
+    const created = await this.getById(data.id);
+    if (!created) throw new Error("Created team could not be loaded");
+    return created;
+  }
+
+  async update(id: string, input: TeamUpdateInput): Promise<Team> {
+    const update: Database["public"]["Tables"]["teams"]["Update"] = {};
+    if (input.name !== undefined) update.name = input.name;
+    if (input.shortName !== undefined) update.short_name = input.shortName;
+    if (input.manager !== undefined) update.manager = input.manager;
+    if (input.headCoach !== undefined) update.head_coach = input.headCoach;
+    const { error } = await this.supabase.from("teams").update(update).eq("id", id);
+    if (error) throw new Error("Unable to update team");
+    const updated = await this.getById(id);
+    if (!updated) throw new Error("Updated team could not be loaded");
+    return updated;
+  }
+
+  async transitionStatus(id: string, targetStatus: Team["status"]): Promise<Team> {
+    const { error } = await this.supabase.from("teams").update({ status: targetStatus }).eq("id", id);
+    if (error) throw new Error("Unable to transition team status");
+    const updated = await this.getById(id);
+    if (!updated) throw new Error("Transitioned team could not be loaded");
+    return updated;
+  }
+
+  delete(_id: string): Promise<void> {
+    return Promise.reject(new Error("Team delete is not available in Batch 2.7"));
   }
 
   private async mapRows(rows: TeamRow[]): Promise<Team[]> {

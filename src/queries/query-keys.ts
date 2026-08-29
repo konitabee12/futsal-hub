@@ -11,4 +11,18 @@ export const queryKeys = {
     all: () => ["players"] as const,
     detail: (id: string) => ["players", id] as const,
   },
+  officials: {
+    all: () => ["officials"] as const,
+  },
+  documents: {
+    all: () => ["documents"] as const,
+  },
+  verifications: {
+    all: () => ["verifications"] as const,
+    detail: (id: string) => ["verifications", id] as const,
+  },
+  eligibility: {
+    all: () => ["eligibility"] as const,
+    detail: (id: string) => ["eligibility", id] as const,
+  },
 } as const;

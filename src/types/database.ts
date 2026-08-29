@@ -54,6 +54,43 @@ export interface Database {
         status: string;
         eligibility: string;
       }>;
+      players: TableDefinition<{
+        id: string;
+        team_id: string;
+        name: string;
+        number: number;
+        position: string;
+        birth_date: string;
+        status: string;
+        eligibility: string;
+        created_at: string;
+        updated_at: string;
+      }>;
+      officials: TableDefinition<{
+        id: string;
+        name: string;
+        position: string;
+        status: string;
+        eligibility: string;
+        created_at: string;
+        updated_at: string;
+      }>;
+      team_members: TableDefinition<{
+        team_id: string;
+        player_id: string | null;
+        official_id: string | null;
+        created_at: string;
+      }>;
+      identities: TableDefinition<{
+        id: string;
+        player_id: string | null;
+        official_id: string | null;
+        identity_type: string;
+        identity_number: string;
+        address: string | null;
+        phone: string | null;
+        email: string | null;
+      }>;
       groups: TableDefinition<{ id: string; name: string }>;
       group_teams: TableDefinition<{ group_id: string; team_id: string }>;
       team_player_counts: TableDefinition<{ team_id: string; player_count: number }>;
@@ -61,7 +98,12 @@ export interface Database {
         id: string;
         owner_type: string;
         owner_id: string;
+        document_type: string;
+        file_reference: string;
+        version: number;
+        uploaded_by: string;
         status: string;
+        created_at: string;
       }>;
       audit_logs: TableDefinition<{
         id: string;
