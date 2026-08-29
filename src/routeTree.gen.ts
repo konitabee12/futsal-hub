@@ -25,6 +25,7 @@ import { Route as AdminKompetisiRouteImport } from './routes/admin.kompetisi'
 import { Route as AdminKontingenRouteImport } from './routes/admin.kontingen'
 import { Route as AdminOfficialRouteImport } from './routes/admin.official'
 import { Route as AdminPemainRouteImport } from './routes/admin.pemain'
+import { Route as AdminPertandinganRouteImport } from './routes/admin.pertandingan'
 import { Route as AdminTimRouteImport } from './routes/admin.tim'
 import { Route as AdminVenueRouteImport } from './routes/admin.venue'
 import { Route as AdminVerifikasiRouteImport } from './routes/admin.verifikasi'
@@ -113,6 +114,11 @@ const AdminPemainRoute = AdminPemainRouteImport.update({
   path: '/admin/pemain',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminPertandinganRoute = AdminPertandinganRouteImport.update({
+  id: '/admin/pertandingan',
+  path: '/admin/pertandingan',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminTimRoute = AdminTimRouteImport.update({
   id: '/admin/tim',
   path: '/admin/tim',
@@ -166,6 +172,7 @@ export interface FileRoutesByFullPath {
   '/admin/kontingen': typeof AdminKontingenRoute
   '/admin/official': typeof AdminOfficialRoute
   '/admin/pemain': typeof AdminPemainRoute
+  '/admin/pertandingan': typeof AdminPertandinganRoute
   '/admin/tim': typeof AdminTimRoute
   '/admin/venue': typeof AdminVenueRoute
   '/admin/verifikasi': typeof AdminVerifikasiRoute
@@ -191,6 +198,7 @@ export interface FileRoutesByTo {
   '/admin/kontingen': typeof AdminKontingenRoute
   '/admin/official': typeof AdminOfficialRoute
   '/admin/pemain': typeof AdminPemainRoute
+  '/admin/pertandingan': typeof AdminPertandinganRoute
   '/admin/tim': typeof AdminTimRoute
   '/admin/venue': typeof AdminVenueRoute
   '/admin/verifikasi': typeof AdminVerifikasiRoute
@@ -217,6 +225,7 @@ export interface FileRoutesById {
   '/admin/kontingen': typeof AdminKontingenRoute
   '/admin/official': typeof AdminOfficialRoute
   '/admin/pemain': typeof AdminPemainRoute
+  '/admin/pertandingan': typeof AdminPertandinganRoute
   '/admin/tim': typeof AdminTimRoute
   '/admin/venue': typeof AdminVenueRoute
   '/admin/verifikasi': typeof AdminVerifikasiRoute
@@ -244,6 +253,7 @@ export interface FileRouteTypes {
     | '/admin/kontingen'
     | '/admin/official'
     | '/admin/pemain'
+    | '/admin/pertandingan'
     | '/admin/tim'
     | '/admin/venue'
     | '/admin/verifikasi'
@@ -269,6 +279,7 @@ export interface FileRouteTypes {
     | '/admin/kontingen'
     | '/admin/official'
     | '/admin/pemain'
+    | '/admin/pertandingan'
     | '/admin/tim'
     | '/admin/venue'
     | '/admin/verifikasi'
@@ -294,6 +305,7 @@ export interface FileRouteTypes {
     | '/admin/kontingen'
     | '/admin/official'
     | '/admin/pemain'
+    | '/admin/pertandingan'
     | '/admin/tim'
     | '/admin/venue'
     | '/admin/verifikasi'
@@ -320,6 +332,7 @@ export interface RootRouteChildren {
   AdminKontingenRoute: typeof AdminKontingenRoute
   AdminOfficialRoute: typeof AdminOfficialRoute
   AdminPemainRoute: typeof AdminPemainRoute
+  AdminPertandinganRoute: typeof AdminPertandinganRoute
   AdminTimRoute: typeof AdminTimRoute
   AdminVenueRoute: typeof AdminVenueRoute
   AdminVerifikasiRoute: typeof AdminVerifikasiRoute
@@ -440,6 +453,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminPemainRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/pertandingan': {
+      id: '/admin/pertandingan'
+      path: '/admin/pertandingan'
+      fullPath: '/admin/pertandingan'
+      preLoaderRoute: typeof AdminPertandinganRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/tim': {
       id: '/admin/tim'
       path: '/admin/tim'
@@ -551,6 +571,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminKontingenRoute: AdminKontingenRoute,
   AdminOfficialRoute: AdminOfficialRoute,
   AdminPemainRoute: AdminPemainRoute,
+  AdminPertandinganRoute: AdminPertandinganRoute,
   AdminTimRoute: AdminTimRoute,
   AdminVenueRoute: AdminVenueRoute,
   AdminVerifikasiRoute: AdminVerifikasiRoute,
