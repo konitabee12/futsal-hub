@@ -20,10 +20,15 @@ import { Route as TimRouteImport } from './routes/tim'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminDokumenRouteImport } from './routes/admin.dokumen'
 import { Route as AdminEligibilityRouteImport } from './routes/admin.eligibility'
+import { Route as AdminHasilRouteImport } from './routes/admin.hasil'
+import { Route as AdminJadwalRouteImport } from './routes/admin.jadwal'
+import { Route as AdminKompetisiRouteImport } from './routes/admin.kompetisi'
 import { Route as AdminKontingenRouteImport } from './routes/admin.kontingen'
 import { Route as AdminOfficialRouteImport } from './routes/admin.official'
 import { Route as AdminPemainRouteImport } from './routes/admin.pemain'
+import { Route as AdminPertandinganRouteImport } from './routes/admin.pertandingan'
 import { Route as AdminTimRouteImport } from './routes/admin.tim'
+import { Route as AdminVenueRouteImport } from './routes/admin.venue'
 import { Route as AdminVerifikasiRouteImport } from './routes/admin.verifikasi'
 import { Route as HasilMatchIdRouteImport } from './routes/hasil.$matchId'
 import { Route as PemainPlayerIdRouteImport } from './routes/pemain.$playerId'
@@ -85,6 +90,21 @@ const AdminEligibilityRoute = AdminEligibilityRouteImport.update({
   path: '/admin/eligibility',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminHasilRoute = AdminHasilRouteImport.update({
+  id: '/admin/hasil',
+  path: '/admin/hasil',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminJadwalRoute = AdminJadwalRouteImport.update({
+  id: '/admin/jadwal',
+  path: '/admin/jadwal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminKompetisiRoute = AdminKompetisiRouteImport.update({
+  id: '/admin/kompetisi',
+  path: '/admin/kompetisi',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminKontingenRoute = AdminKontingenRouteImport.update({
   id: '/admin/kontingen',
   path: '/admin/kontingen',
@@ -100,9 +120,19 @@ const AdminPemainRoute = AdminPemainRouteImport.update({
   path: '/admin/pemain',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminPertandinganRoute = AdminPertandinganRouteImport.update({
+  id: '/admin/pertandingan',
+  path: '/admin/pertandingan',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminTimRoute = AdminTimRouteImport.update({
   id: '/admin/tim',
   path: '/admin/tim',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminVenueRoute = AdminVenueRouteImport.update({
+  id: '/admin/venue',
+  path: '/admin/venue',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminVerifikasiRoute = AdminVerifikasiRouteImport.update({
@@ -143,10 +173,15 @@ export interface FileRoutesByFullPath {
   '/tim': typeof TimRouteWithChildren
   '/admin/dokumen': typeof AdminDokumenRoute
   '/admin/eligibility': typeof AdminEligibilityRoute
+  '/admin/hasil': typeof AdminHasilRoute
+  '/admin/jadwal': typeof AdminJadwalRoute
+  '/admin/kompetisi': typeof AdminKompetisiRoute
   '/admin/kontingen': typeof AdminKontingenRoute
   '/admin/official': typeof AdminOfficialRoute
   '/admin/pemain': typeof AdminPemainRoute
+  '/admin/pertandingan': typeof AdminPertandinganRoute
   '/admin/tim': typeof AdminTimRoute
+  '/admin/venue': typeof AdminVenueRoute
   '/admin/verifikasi': typeof AdminVerifikasiRoute
   '/hasil/$matchId': typeof HasilMatchIdRoute
   '/pemain/$playerId': typeof PemainPlayerIdRoute
@@ -165,10 +200,15 @@ export interface FileRoutesByTo {
   '/tim': typeof TimRouteWithChildren
   '/admin/dokumen': typeof AdminDokumenRoute
   '/admin/eligibility': typeof AdminEligibilityRoute
+  '/admin/hasil': typeof AdminHasilRoute
+  '/admin/jadwal': typeof AdminJadwalRoute
+  '/admin/kompetisi': typeof AdminKompetisiRoute
   '/admin/kontingen': typeof AdminKontingenRoute
   '/admin/official': typeof AdminOfficialRoute
   '/admin/pemain': typeof AdminPemainRoute
+  '/admin/pertandingan': typeof AdminPertandinganRoute
   '/admin/tim': typeof AdminTimRoute
+  '/admin/venue': typeof AdminVenueRoute
   '/admin/verifikasi': typeof AdminVerifikasiRoute
   '/hasil/$matchId': typeof HasilMatchIdRoute
   '/pemain/$playerId': typeof PemainPlayerIdRoute
@@ -188,10 +228,15 @@ export interface FileRoutesById {
   '/tim': typeof TimRouteWithChildren
   '/admin/dokumen': typeof AdminDokumenRoute
   '/admin/eligibility': typeof AdminEligibilityRoute
+  '/admin/hasil': typeof AdminHasilRoute
+  '/admin/jadwal': typeof AdminJadwalRoute
+  '/admin/kompetisi': typeof AdminKompetisiRoute
   '/admin/kontingen': typeof AdminKontingenRoute
   '/admin/official': typeof AdminOfficialRoute
   '/admin/pemain': typeof AdminPemainRoute
+  '/admin/pertandingan': typeof AdminPertandinganRoute
   '/admin/tim': typeof AdminTimRoute
+  '/admin/venue': typeof AdminVenueRoute
   '/admin/verifikasi': typeof AdminVerifikasiRoute
   '/hasil/$matchId': typeof HasilMatchIdRoute
   '/pemain/$playerId': typeof PemainPlayerIdRoute
@@ -212,10 +257,15 @@ export interface FileRouteTypes {
     | '/tim'
     | '/admin/dokumen'
     | '/admin/eligibility'
+    | '/admin/hasil'
+    | '/admin/jadwal'
+    | '/admin/kompetisi'
     | '/admin/kontingen'
     | '/admin/official'
     | '/admin/pemain'
+    | '/admin/pertandingan'
     | '/admin/tim'
+    | '/admin/venue'
     | '/admin/verifikasi'
     | '/hasil/$matchId'
     | '/pemain/$playerId'
@@ -234,10 +284,15 @@ export interface FileRouteTypes {
     | '/tim'
     | '/admin/dokumen'
     | '/admin/eligibility'
+    | '/admin/hasil'
+    | '/admin/jadwal'
+    | '/admin/kompetisi'
     | '/admin/kontingen'
     | '/admin/official'
     | '/admin/pemain'
+    | '/admin/pertandingan'
     | '/admin/tim'
+    | '/admin/venue'
     | '/admin/verifikasi'
     | '/hasil/$matchId'
     | '/pemain/$playerId'
@@ -256,10 +311,15 @@ export interface FileRouteTypes {
     | '/tim'
     | '/admin/dokumen'
     | '/admin/eligibility'
+    | '/admin/hasil'
+    | '/admin/jadwal'
+    | '/admin/kompetisi'
     | '/admin/kontingen'
     | '/admin/official'
     | '/admin/pemain'
+    | '/admin/pertandingan'
     | '/admin/tim'
+    | '/admin/venue'
     | '/admin/verifikasi'
     | '/hasil/$matchId'
     | '/pemain/$playerId'
@@ -279,10 +339,15 @@ export interface RootRouteChildren {
   TimRoute: typeof TimRouteWithChildren
   AdminDokumenRoute: typeof AdminDokumenRoute
   AdminEligibilityRoute: typeof AdminEligibilityRoute
+  AdminHasilRoute: typeof AdminHasilRoute
+  AdminJadwalRoute: typeof AdminJadwalRoute
+  AdminKompetisiRoute: typeof AdminKompetisiRoute
   AdminKontingenRoute: typeof AdminKontingenRoute
   AdminOfficialRoute: typeof AdminOfficialRoute
   AdminPemainRoute: typeof AdminPemainRoute
+  AdminPertandinganRoute: typeof AdminPertandinganRoute
   AdminTimRoute: typeof AdminTimRoute
+  AdminVenueRoute: typeof AdminVenueRoute
   AdminVerifikasiRoute: typeof AdminVerifikasiRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
@@ -366,6 +431,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminEligibilityRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/hasil': {
+      id: '/admin/hasil'
+      path: '/admin/hasil'
+      fullPath: '/admin/hasil'
+      preLoaderRoute: typeof AdminHasilRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/jadwal': {
+      id: '/admin/jadwal'
+      path: '/admin/jadwal'
+      fullPath: '/admin/jadwal'
+      preLoaderRoute: typeof AdminJadwalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/kompetisi': {
+      id: '/admin/kompetisi'
+      path: '/admin/kompetisi'
+      fullPath: '/admin/kompetisi'
+      preLoaderRoute: typeof AdminKompetisiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/kontingen': {
       id: '/admin/kontingen'
       path: '/admin/kontingen'
@@ -387,11 +473,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminPemainRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/pertandingan': {
+      id: '/admin/pertandingan'
+      path: '/admin/pertandingan'
+      fullPath: '/admin/pertandingan'
+      preLoaderRoute: typeof AdminPertandinganRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/tim': {
       id: '/admin/tim'
       path: '/admin/tim'
       fullPath: '/admin/tim'
       preLoaderRoute: typeof AdminTimRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/venue': {
+      id: '/admin/venue'
+      path: '/admin/venue'
+      fullPath: '/admin/venue'
+      preLoaderRoute: typeof AdminVenueRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/verifikasi': {
@@ -486,10 +586,15 @@ const rootRouteChildren: RootRouteChildren = {
   TimRoute: TimRouteWithChildren,
   AdminDokumenRoute: AdminDokumenRoute,
   AdminEligibilityRoute: AdminEligibilityRoute,
+  AdminHasilRoute: AdminHasilRoute,
+  AdminJadwalRoute: AdminJadwalRoute,
+  AdminKompetisiRoute: AdminKompetisiRoute,
   AdminKontingenRoute: AdminKontingenRoute,
   AdminOfficialRoute: AdminOfficialRoute,
   AdminPemainRoute: AdminPemainRoute,
+  AdminPertandinganRoute: AdminPertandinganRoute,
   AdminTimRoute: AdminTimRoute,
+  AdminVenueRoute: AdminVenueRoute,
   AdminVerifikasiRoute: AdminVerifikasiRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
