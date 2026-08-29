@@ -25,6 +25,7 @@ import { Route as AdminKontingenRouteImport } from './routes/admin.kontingen'
 import { Route as AdminOfficialRouteImport } from './routes/admin.official'
 import { Route as AdminPemainRouteImport } from './routes/admin.pemain'
 import { Route as AdminTimRouteImport } from './routes/admin.tim'
+import { Route as AdminVenueRouteImport } from './routes/admin.venue'
 import { Route as AdminVerifikasiRouteImport } from './routes/admin.verifikasi'
 import { Route as HasilMatchIdRouteImport } from './routes/hasil.$matchId'
 import { Route as PemainPlayerIdRouteImport } from './routes/pemain.$playerId'
@@ -111,6 +112,11 @@ const AdminTimRoute = AdminTimRouteImport.update({
   path: '/admin/tim',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminVenueRoute = AdminVenueRouteImport.update({
+  id: '/admin/venue',
+  path: '/admin/venue',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminVerifikasiRoute = AdminVerifikasiRouteImport.update({
   id: '/admin/verifikasi',
   path: '/admin/verifikasi',
@@ -154,6 +160,7 @@ export interface FileRoutesByFullPath {
   '/admin/official': typeof AdminOfficialRoute
   '/admin/pemain': typeof AdminPemainRoute
   '/admin/tim': typeof AdminTimRoute
+  '/admin/venue': typeof AdminVenueRoute
   '/admin/verifikasi': typeof AdminVerifikasiRoute
   '/hasil/$matchId': typeof HasilMatchIdRoute
   '/pemain/$playerId': typeof PemainPlayerIdRoute
@@ -177,6 +184,7 @@ export interface FileRoutesByTo {
   '/admin/official': typeof AdminOfficialRoute
   '/admin/pemain': typeof AdminPemainRoute
   '/admin/tim': typeof AdminTimRoute
+  '/admin/venue': typeof AdminVenueRoute
   '/admin/verifikasi': typeof AdminVerifikasiRoute
   '/hasil/$matchId': typeof HasilMatchIdRoute
   '/pemain/$playerId': typeof PemainPlayerIdRoute
@@ -201,6 +209,7 @@ export interface FileRoutesById {
   '/admin/official': typeof AdminOfficialRoute
   '/admin/pemain': typeof AdminPemainRoute
   '/admin/tim': typeof AdminTimRoute
+  '/admin/venue': typeof AdminVenueRoute
   '/admin/verifikasi': typeof AdminVerifikasiRoute
   '/hasil/$matchId': typeof HasilMatchIdRoute
   '/pemain/$playerId': typeof PemainPlayerIdRoute
@@ -226,6 +235,7 @@ export interface FileRouteTypes {
     | '/admin/official'
     | '/admin/pemain'
     | '/admin/tim'
+    | '/admin/venue'
     | '/admin/verifikasi'
     | '/hasil/$matchId'
     | '/pemain/$playerId'
@@ -249,6 +259,7 @@ export interface FileRouteTypes {
     | '/admin/official'
     | '/admin/pemain'
     | '/admin/tim'
+    | '/admin/venue'
     | '/admin/verifikasi'
     | '/hasil/$matchId'
     | '/pemain/$playerId'
@@ -272,6 +283,7 @@ export interface FileRouteTypes {
     | '/admin/official'
     | '/admin/pemain'
     | '/admin/tim'
+    | '/admin/venue'
     | '/admin/verifikasi'
     | '/hasil/$matchId'
     | '/pemain/$playerId'
@@ -296,6 +308,7 @@ export interface RootRouteChildren {
   AdminOfficialRoute: typeof AdminOfficialRoute
   AdminPemainRoute: typeof AdminPemainRoute
   AdminTimRoute: typeof AdminTimRoute
+  AdminVenueRoute: typeof AdminVenueRoute
   AdminVerifikasiRoute: typeof AdminVerifikasiRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
@@ -414,6 +427,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminTimRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/venue': {
+      id: '/admin/venue'
+      path: '/admin/venue'
+      fullPath: '/admin/venue'
+      preLoaderRoute: typeof AdminVenueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/verifikasi': {
       id: '/admin/verifikasi'
       path: '/admin/verifikasi'
@@ -511,6 +531,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminOfficialRoute: AdminOfficialRoute,
   AdminPemainRoute: AdminPemainRoute,
   AdminTimRoute: AdminTimRoute,
+  AdminVenueRoute: AdminVenueRoute,
   AdminVerifikasiRoute: AdminVerifikasiRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
