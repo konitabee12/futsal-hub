@@ -20,6 +20,7 @@ import { Route as TimRouteImport } from './routes/tim'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminDokumenRouteImport } from './routes/admin.dokumen'
 import { Route as AdminEligibilityRouteImport } from './routes/admin.eligibility'
+import { Route as AdminHasilRouteImport } from './routes/admin.hasil'
 import { Route as AdminJadwalRouteImport } from './routes/admin.jadwal'
 import { Route as AdminKompetisiRouteImport } from './routes/admin.kompetisi'
 import { Route as AdminKontingenRouteImport } from './routes/admin.kontingen'
@@ -87,6 +88,11 @@ const AdminDokumenRoute = AdminDokumenRouteImport.update({
 const AdminEligibilityRoute = AdminEligibilityRouteImport.update({
   id: '/admin/eligibility',
   path: '/admin/eligibility',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminHasilRoute = AdminHasilRouteImport.update({
+  id: '/admin/hasil',
+  path: '/admin/hasil',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminJadwalRoute = AdminJadwalRouteImport.update({
@@ -167,6 +173,7 @@ export interface FileRoutesByFullPath {
   '/tim': typeof TimRouteWithChildren
   '/admin/dokumen': typeof AdminDokumenRoute
   '/admin/eligibility': typeof AdminEligibilityRoute
+  '/admin/hasil': typeof AdminHasilRoute
   '/admin/jadwal': typeof AdminJadwalRoute
   '/admin/kompetisi': typeof AdminKompetisiRoute
   '/admin/kontingen': typeof AdminKontingenRoute
@@ -193,6 +200,7 @@ export interface FileRoutesByTo {
   '/tim': typeof TimRouteWithChildren
   '/admin/dokumen': typeof AdminDokumenRoute
   '/admin/eligibility': typeof AdminEligibilityRoute
+  '/admin/hasil': typeof AdminHasilRoute
   '/admin/jadwal': typeof AdminJadwalRoute
   '/admin/kompetisi': typeof AdminKompetisiRoute
   '/admin/kontingen': typeof AdminKontingenRoute
@@ -220,6 +228,7 @@ export interface FileRoutesById {
   '/tim': typeof TimRouteWithChildren
   '/admin/dokumen': typeof AdminDokumenRoute
   '/admin/eligibility': typeof AdminEligibilityRoute
+  '/admin/hasil': typeof AdminHasilRoute
   '/admin/jadwal': typeof AdminJadwalRoute
   '/admin/kompetisi': typeof AdminKompetisiRoute
   '/admin/kontingen': typeof AdminKontingenRoute
@@ -248,6 +257,7 @@ export interface FileRouteTypes {
     | '/tim'
     | '/admin/dokumen'
     | '/admin/eligibility'
+    | '/admin/hasil'
     | '/admin/jadwal'
     | '/admin/kompetisi'
     | '/admin/kontingen'
@@ -274,6 +284,7 @@ export interface FileRouteTypes {
     | '/tim'
     | '/admin/dokumen'
     | '/admin/eligibility'
+    | '/admin/hasil'
     | '/admin/jadwal'
     | '/admin/kompetisi'
     | '/admin/kontingen'
@@ -300,6 +311,7 @@ export interface FileRouteTypes {
     | '/tim'
     | '/admin/dokumen'
     | '/admin/eligibility'
+    | '/admin/hasil'
     | '/admin/jadwal'
     | '/admin/kompetisi'
     | '/admin/kontingen'
@@ -327,6 +339,7 @@ export interface RootRouteChildren {
   TimRoute: typeof TimRouteWithChildren
   AdminDokumenRoute: typeof AdminDokumenRoute
   AdminEligibilityRoute: typeof AdminEligibilityRoute
+  AdminHasilRoute: typeof AdminHasilRoute
   AdminJadwalRoute: typeof AdminJadwalRoute
   AdminKompetisiRoute: typeof AdminKompetisiRoute
   AdminKontingenRoute: typeof AdminKontingenRoute
@@ -416,6 +429,13 @@ declare module '@tanstack/react-router' {
       path: '/admin/eligibility'
       fullPath: '/admin/eligibility'
       preLoaderRoute: typeof AdminEligibilityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/hasil': {
+      id: '/admin/hasil'
+      path: '/admin/hasil'
+      fullPath: '/admin/hasil'
+      preLoaderRoute: typeof AdminHasilRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/jadwal': {
@@ -566,6 +586,7 @@ const rootRouteChildren: RootRouteChildren = {
   TimRoute: TimRouteWithChildren,
   AdminDokumenRoute: AdminDokumenRoute,
   AdminEligibilityRoute: AdminEligibilityRoute,
+  AdminHasilRoute: AdminHasilRoute,
   AdminJadwalRoute: AdminJadwalRoute,
   AdminKompetisiRoute: AdminKompetisiRoute,
   AdminKontingenRoute: AdminKontingenRoute,
