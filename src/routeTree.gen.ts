@@ -20,6 +20,7 @@ import { Route as TimRouteImport } from './routes/tim'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminDokumenRouteImport } from './routes/admin.dokumen'
 import { Route as AdminEligibilityRouteImport } from './routes/admin.eligibility'
+import { Route as AdminJadwalRouteImport } from './routes/admin.jadwal'
 import { Route as AdminKompetisiRouteImport } from './routes/admin.kompetisi'
 import { Route as AdminKontingenRouteImport } from './routes/admin.kontingen'
 import { Route as AdminOfficialRouteImport } from './routes/admin.official'
@@ -85,6 +86,11 @@ const AdminDokumenRoute = AdminDokumenRouteImport.update({
 const AdminEligibilityRoute = AdminEligibilityRouteImport.update({
   id: '/admin/eligibility',
   path: '/admin/eligibility',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminJadwalRoute = AdminJadwalRouteImport.update({
+  id: '/admin/jadwal',
+  path: '/admin/jadwal',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminKompetisiRoute = AdminKompetisiRouteImport.update({
@@ -155,6 +161,7 @@ export interface FileRoutesByFullPath {
   '/tim': typeof TimRouteWithChildren
   '/admin/dokumen': typeof AdminDokumenRoute
   '/admin/eligibility': typeof AdminEligibilityRoute
+  '/admin/jadwal': typeof AdminJadwalRoute
   '/admin/kompetisi': typeof AdminKompetisiRoute
   '/admin/kontingen': typeof AdminKontingenRoute
   '/admin/official': typeof AdminOfficialRoute
@@ -179,6 +186,7 @@ export interface FileRoutesByTo {
   '/tim': typeof TimRouteWithChildren
   '/admin/dokumen': typeof AdminDokumenRoute
   '/admin/eligibility': typeof AdminEligibilityRoute
+  '/admin/jadwal': typeof AdminJadwalRoute
   '/admin/kompetisi': typeof AdminKompetisiRoute
   '/admin/kontingen': typeof AdminKontingenRoute
   '/admin/official': typeof AdminOfficialRoute
@@ -204,6 +212,7 @@ export interface FileRoutesById {
   '/tim': typeof TimRouteWithChildren
   '/admin/dokumen': typeof AdminDokumenRoute
   '/admin/eligibility': typeof AdminEligibilityRoute
+  '/admin/jadwal': typeof AdminJadwalRoute
   '/admin/kompetisi': typeof AdminKompetisiRoute
   '/admin/kontingen': typeof AdminKontingenRoute
   '/admin/official': typeof AdminOfficialRoute
@@ -230,6 +239,7 @@ export interface FileRouteTypes {
     | '/tim'
     | '/admin/dokumen'
     | '/admin/eligibility'
+    | '/admin/jadwal'
     | '/admin/kompetisi'
     | '/admin/kontingen'
     | '/admin/official'
@@ -254,6 +264,7 @@ export interface FileRouteTypes {
     | '/tim'
     | '/admin/dokumen'
     | '/admin/eligibility'
+    | '/admin/jadwal'
     | '/admin/kompetisi'
     | '/admin/kontingen'
     | '/admin/official'
@@ -278,6 +289,7 @@ export interface FileRouteTypes {
     | '/tim'
     | '/admin/dokumen'
     | '/admin/eligibility'
+    | '/admin/jadwal'
     | '/admin/kompetisi'
     | '/admin/kontingen'
     | '/admin/official'
@@ -303,6 +315,7 @@ export interface RootRouteChildren {
   TimRoute: typeof TimRouteWithChildren
   AdminDokumenRoute: typeof AdminDokumenRoute
   AdminEligibilityRoute: typeof AdminEligibilityRoute
+  AdminJadwalRoute: typeof AdminJadwalRoute
   AdminKompetisiRoute: typeof AdminKompetisiRoute
   AdminKontingenRoute: typeof AdminKontingenRoute
   AdminOfficialRoute: typeof AdminOfficialRoute
@@ -390,6 +403,13 @@ declare module '@tanstack/react-router' {
       path: '/admin/eligibility'
       fullPath: '/admin/eligibility'
       preLoaderRoute: typeof AdminEligibilityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/jadwal': {
+      id: '/admin/jadwal'
+      path: '/admin/jadwal'
+      fullPath: '/admin/jadwal'
+      preLoaderRoute: typeof AdminJadwalRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/kompetisi': {
@@ -526,6 +546,7 @@ const rootRouteChildren: RootRouteChildren = {
   TimRoute: TimRouteWithChildren,
   AdminDokumenRoute: AdminDokumenRoute,
   AdminEligibilityRoute: AdminEligibilityRoute,
+  AdminJadwalRoute: AdminJadwalRoute,
   AdminKompetisiRoute: AdminKompetisiRoute,
   AdminKontingenRoute: AdminKontingenRoute,
   AdminOfficialRoute: AdminOfficialRoute,
